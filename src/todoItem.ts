@@ -3,7 +3,7 @@ class TodoItem{
     public task:string;
     public complete:boolean;
 
-    constructor(id:number,task:string,complete:boolean) {
+    constructor(id:number,task:string,complete:boolean = false) {
         this.id = id;
         this.task = task;
         this.complete = complete;

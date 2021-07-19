@@ -1,21 +1,23 @@
 import TodoItem from "./todoItem";
+import { data } from "./data";
+import TodoController from "./TodoController";
 
-const data = [
-    {
-        id:1,
-        task:"장보기",
-        complete:true
-    },
-    {
-        id:2,
-        task:"TS 학습하기",
-        complete:false
-    }
-]
+const simpleTodo:TodoItem[] = data.map(
+    (item)=>new TodoItem(item.id,item.task,item.complete)
+);
 
+const myTodoCollection = new TodoController("my Todo List", simpleTodo);
 
-for(let i:number =0; i< data.length; i++){
-    let todoItem:TodoItem = new TodoItem(data[i].id,data[i].task,data[i].complete)
-    todoItem.printDetails()
-}
+myTodoCollection.addTodo("JavaScript 학습하기.")
+myTodoCollection.addTodo("친구만나기")
 
+myTodoCollection.makeComplete(3,true)
+
+console.log(`${myTodoCollection.userName}`)
+
+myTodoCollection.getTodoItems(true).forEach((item)=>item.printDetails())
+console.log("=============================================")
+myTodoCollection.getTodoItems(false).forEach((item)=>item.printDetails())
+myTodoCollection.remvoeComplete()
+console.log("=============================================")
+myTodoCollection.getTodoItems(true).forEach((item)=>item.printDetails())

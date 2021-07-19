@@ -3,20 +3,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var todoItem_1 = __importDefault(require("./todoItem"));
-var data = [
-    {
-        id: 1,
-        task: "장보기",
-        complete: true
-    },
-    {
-        id: 2,
-        task: "TS 학습하기",
-        complete: false
-    }
-];
-for (var i = 0; i < data.length; i++) {
-    var todoItem = new todoItem_1.default(data[i].id, data[i].task, data[i].complete);
-    todoItem.printDetails();
-}
+const todoItem_1 = __importDefault(require("./todoItem"));
+const data_1 = require("./data");
+const TodoController_1 = __importDefault(require("./TodoController"));
+const simpleTodo = data_1.data.map((item) => new todoItem_1.default(item.id, item.task, item.complete));
+const myTodoCollection = new TodoController_1.default("my Todo List", simpleTodo);
+myTodoCollection.addTodo("JavaScript 학습하기.");
+myTodoCollection.addTodo("친구만나기");
+myTodoCollection.makeComplete(3, true);
+console.log(`${myTodoCollection.userName}`);
+myTodoCollection.getTodoItems(true).forEach((item) => item.printDetails());
+console.log("=============================================");
+myTodoCollection.getTodoItems(false).forEach((item) => item.printDetails());
+myTodoCollection.remvoeComplete();
+console.log("=============================================");
+myTodoCollection.getTodoItems(true).forEach((item) => item.printDetails());
